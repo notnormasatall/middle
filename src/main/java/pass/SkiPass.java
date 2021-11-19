@@ -1,12 +1,12 @@
 package pass;
 
 
-public abstract class Pass{
+public abstract class SkiPass {
     private int ID;
     private boolean blocked = false;
     private boolean expired = false;
 
-    public Pass(int ID) {
+    public SkiPass(int ID) {
         this.ID = ID;
     }
 
@@ -27,5 +27,5 @@ public abstract class Pass{
     }
 
     public abstract boolean usePass();
-    public abstract boolean ifReadyToUse();
+    public abstract boolean ifAvailable();
 }

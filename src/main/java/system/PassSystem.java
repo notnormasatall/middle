@@ -5,60 +5,68 @@ import constructors.*;
 import lombok.Getter;
 import pass.DaysPass;
 import pass.HolidayPass;
-import pass.Pass;
+import pass.SkiPass;
 import pass.RidesPass;
 
 import java.util.ArrayList;
 
 public class PassSystem {
     @Getter
-    private ArrayList<Pass> passes = new ArrayList<>();
+    private ArrayList<SkiPass> passes = new ArrayList<>();
     private int rejected = 0;
     private int accepted = 0;
+    private int overallOperations = 0;
     private int idCounter = 0;
 
     public PassSystem() {}
 
-
+//    following methods needed to receive different types of passes|attributes
     public void createPass(PassType type, RideType ride) {
-        Pass pass;
+        SkiPass pass;
         pass = new RidesPass(idCounter, type, ride);
         addPass(pass);
         idCounter += 1;
     }
 
     public void createPass(PassType type, DayType day) {
-        Pass pass;
+        SkiPass pass;
         pass = new DaysPass(idCounter, day, type);
         addPass(pass);
         idCounter += 1;
     }
 
     public void createPass(PassType type) {
-        Pass pass;
+        SkiPass pass;
         pass = new HolidayPass(type, idCounter);
         addPass(pass);
         idCounter += 1;
     }
 
-    public void addPass(Pass pass) {
+    public void addPass(SkiPass pass) {
         passes.add(pass);
     }
 
+//    +1 if pass not accepted by the turnstile
     public void addRejected() {
+        overallOperations += 1;
         rejected += 1;
     }
 
+//    +1 if pass accepted by the turnstile
     public void addAccepted() {
+        overallOperations += 1;
         accepted += 1;
     }
 
-    public void expireTicket(Pass pass) {
+    public void expireTicket(SkiPass pass) {
         pass.setExpired();
     }
 
+//    provides statistics of how many passes are rejected|accepted
     public void returnStat() {
-        System.out.println(rejected);
-        System.out.println(accepted);
+        System.out.println("Rejected:");
+        System.out.println(rejected/overallOperations + "%");
+        System.out.println("Accepted:");
+        System.out.println(accepted/overallOperations + "%");
     }
 }

@@ -6,7 +6,7 @@ import lombok.Getter;
 
 import java.util.Date;
 
-public class DaysPass extends Pass{
+public class DaysPass extends SkiPass {
     @Getter
     private PassType type;
     private int daysAvailable;
@@ -21,6 +21,7 @@ public class DaysPass extends Pass{
                 '}';
     }
 
+//  put a day-boundary for weekend's pass number of days (2)
     public DaysPass(int ID, DayType days, PassType type) {
         super(ID);
         this.type = type;
@@ -47,10 +48,11 @@ public class DaysPass extends Pass{
     }
 
     @Override
-    public boolean ifReadyToUse() {
+    public boolean ifAvailable() {
         return daysAvailable > 0;
     }
 
+    //    needed to calculate the day difference between two Date obj
     private int dayDifference(Date dateOne, Date dateTwo) {
 
         long dateOneInMs = dateOne.getTime();

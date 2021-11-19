@@ -4,7 +4,7 @@ import constructors.PassType;
 import constructors.RideType;
 import lombok.Getter;
 
-public class RidesPass extends Pass{
+public class RidesPass extends SkiPass {
     @Getter
     private int ridesAvailable;
     private PassType type;
@@ -28,7 +28,7 @@ public class RidesPass extends Pass{
     }
 
     @Override
-    public boolean ifReadyToUse() {
+    public boolean ifAvailable() {
         return this.ridesAvailable > 0;
     }
 

@@ -10,8 +10,8 @@ public class Turnstile {
 
     public Turnstile() {}
 
-    public boolean checkCard(Pass pass) {
-        if (pass.ifExpired() || !pass.ifReadyToUse()) {
+    public boolean checkCard(SkiPass pass) {
+        if (pass.ifExpired() || !pass.ifAvailable()) {
             passSys.addRejected();
             passSys.expireTicket(pass);
             System.out.println("This pass is not available!");

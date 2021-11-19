@@ -5,7 +5,7 @@ import constructors.PassType;
 import java.util.Calendar;
 import java.util.Date;
 
-public class HolidayPass extends Pass{
+public class HolidayPass extends SkiPass {
     private final Date holidayEnd = new Date(18, Calendar.NOVEMBER,18);
     private PassType type;
 
@@ -23,11 +23,12 @@ public class HolidayPass extends Pass{
     }
 
     @Override
-    public boolean ifReadyToUse() {
+    public boolean ifAvailable() {
         Date currDate = new Date();
         return dayDifference(holidayEnd, currDate) < 0;
     }
 
+//    needed to calculate the day difference between two Date obj
     private int dayDifference(Date dateOne, Date dateTwo) {
 
         long dateOneInMs = dateOne.getTime();
